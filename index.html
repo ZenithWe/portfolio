@@ -95,16 +95,19 @@
 
   /* ── LANG TOGGLE ───────────────────────── */
   .lang-toggle {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
     background: transparent;
     border: 1px solid var(--border2);
-    padding: 0.4rem 0.6rem;
+    padding: 0.5rem 0.9rem;
     cursor: pointer;
-    transition: border-color 0.2s, transform 0.15s;
-    display: flex; align-items: center; justify-content: center;
-    line-height: 1;
+    transition: color 0.2s, border-color 0.2s;
+    display: flex; align-items: center; gap: 0.4rem;
   }
-  .lang-toggle:hover { border-color: var(--text); transform: translateY(-1px); }
-  .lang-toggle .lang-flag { font-size: 1.3rem; display: block; }
+  .lang-toggle:hover { color: var(--text); border-color: var(--text); }
+  .lang-toggle .lang-flag { font-size: 0.95rem; }
 
   .nav-cta {
     font-family: var(--font-mono);
@@ -614,8 +617,8 @@
     <li><a href="#contato" data-i18n="nav-contact">Contato</a></li>
   </ul>
   <div class="nav-right">
-    <button class="lang-toggle" id="langBtn" onclick="toggleLang()" aria-label="Switch language">
-      <span class="lang-flag" id="langFlag">🇺🇸</span>
+    <button class="lang-toggle" id="langBtn" onclick="toggleLang()">
+      <span class="lang-flag" id="langFlag" style="font-size:1.4rem;line-height:1">🇺🇸</span>
     </button>
     <a href="https://wa.me/5531996378666" target="_blank" class="nav-cta" data-i18n="nav-cta">WhatsApp →</a>
   </div>
@@ -1050,6 +1053,7 @@
     currentLang = currentLang === 'pt' ? 'en' : 'pt';
     applyTranslations();
     document.getElementById('langFlag').textContent = currentLang === 'pt' ? '🇺🇸' : '🇧🇷';
+    document.getElementById('langLabel').textContent = '';
     document.documentElement.lang = currentLang === 'pt' ? 'pt-BR' : 'en';
 
     // Update contact section bg text
