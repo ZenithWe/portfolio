@@ -104,7 +104,7 @@
     line-height: 1;
   }
   .lang-toggle:hover { border-color: var(--text); transform: translateY(-1px); }
-  .lang-toggle .lang-flag { font-size: 1.3rem; display: block; }
+  .lang-toggle .lang-flag { font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em; font-weight: 500; color: var(--text); display: block; }
 
   .nav-cta {
     font-family: var(--font-mono);
@@ -615,7 +615,7 @@
   </ul>
   <div class="nav-right">
     <button class="lang-toggle" id="langBtn" onclick="toggleLang()" aria-label="Switch language">
-      <span class="lang-flag" id="langFlag">🇺🇸</span>
+      <span class="lang-flag" id="langFlag">US</span>
     </button>
     <a href="https://wa.me/5531996378666" target="_blank" class="nav-cta" data-i18n="nav-cta">WhatsApp →</a>
   </div>
@@ -1049,7 +1049,7 @@
   function toggleLang() {
     currentLang = currentLang === 'pt' ? 'en' : 'pt';
     applyTranslations();
-    document.getElementById('langFlag').textContent = currentLang === 'pt' ? '🇺🇸' : '🇧🇷';
+    document.getElementById('langFlag').textContent = currentLang === 'pt' ? 'US' : 'BR';
     document.documentElement.lang = currentLang === 'pt' ? 'pt-BR' : 'en';
 
     // Update contact section bg text
