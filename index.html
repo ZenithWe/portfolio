@@ -88,6 +88,24 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--text); }
+
+  .nav-right {
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+
+  /* ── LANG TOGGLE ───────────────────────── */
+  .lang-toggle {
+    background: transparent;
+    border: 1px solid var(--border2);
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1;
+  }
+  .lang-toggle:hover { border-color: var(--text); transform: translateY(-1px); }
+  .lang-toggle .lang-flag { font-size: 1.3rem; display: block; }
+
   .nav-cta {
     font-family: var(--font-mono);
     font-size: 0.75rem;
@@ -452,7 +470,7 @@
     position: relative; overflow: hidden;
   }
   #contato::before {
-    content: 'CONTATO';
+    content: attr(data-bg-text);
     position: absolute;
     bottom: -2rem; right: -1rem;
     font-family: var(--font-display);
@@ -590,12 +608,17 @@
 <nav>
   <a href="#hero" class="nav-logo">ZENITH<span>.</span>WE</a>
   <ul class="nav-links">
-    <li><a href="#about">Sobre</a></li>
-    <li><a href="#services">Serviços</a></li>
-    <li><a href="#projects">Projetos</a></li>
-    <li><a href="#contato">Contato</a></li>
+    <li><a href="#about" data-i18n="nav-about">Sobre</a></li>
+    <li><a href="#services" data-i18n="nav-services">Serviços</a></li>
+    <li><a href="#projects" data-i18n="nav-projects">Projetos</a></li>
+    <li><a href="#contato" data-i18n="nav-contact">Contato</a></li>
   </ul>
-  <a href="https://wa.me/5531996378666" target="_blank" class="nav-cta">WhatsApp →</a>
+  <div class="nav-right">
+    <button class="lang-toggle" id="langBtn" onclick="toggleLang()" aria-label="Switch language">
+      <span class="lang-flag" id="langFlag">🇺🇸</span>
+    </button>
+    <a href="https://wa.me/5531996378666" target="_blank" class="nav-cta" data-i18n="nav-cta">WhatsApp →</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -603,41 +626,41 @@
   <div class="hero-grid"></div>
   <div class="hero-bg-text">ZENITH</div>
 
-  <div class="hero-tag">Desenvolvimento Web — Minas Gerais, BR</div>
+  <div class="hero-tag" data-i18n="hero-tag">Desenvolvimento Web — Minas Gerais, BR</div>
 
   <h1 class="hero-heading fade-up">
-    TRANSFORMANDO<br>
-    IDEIAS EM<br>
-    <span class="line-accent">SITES</span><br>
-    PROFISSIONAIS
+    <span data-i18n="hero-h1-line1">TRANSFORMANDO</span><br>
+    <span data-i18n="hero-h1-line2">IDEIAS EM</span><br>
+    <span class="line-accent" data-i18n="hero-h1-line3">SITES</span><br>
+    <span data-i18n="hero-h1-line4">PROFISSIONAIS</span>
   </h1>
 
-  <p class="hero-sub fade-up">
+  <p class="hero-sub fade-up" data-i18n="hero-sub">
     Olá, sou Mateus — fundador da Zenith We. Criamos sites modernos, 
     rápidos e responsivos que geram credibilidade, atraem clientes 
     e aumentam vendas.
   </p>
 
   <div class="hero-actions fade-up">
-    <a href="#projects" class="btn-primary">Ver Projetos</a>
-    <a href="#contato" class="btn-outline">Falar Comigo</a>
+    <a href="#projects" class="btn-primary" data-i18n="hero-btn1">Ver Projetos</a>
+    <a href="#contato" class="btn-outline" data-i18n="hero-btn2">Falar Comigo</a>
   </div>
 
-  <div class="hero-scroll">Scroll</div>
+  <div class="hero-scroll" data-i18n="scroll">Scroll</div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
   <div class="about-grid">
     <div class="about-text fade-up">
-      <div class="section-label">Sobre Mim</div>
+      <div class="section-label" data-i18n="about-label">Sobre Mim</div>
       <h2 class="section-heading">MATEUS,<br>DEV & FOUNDER</h2>
-      <p>
+      <p data-i18n="about-p1">
         Sou apaixonado por <strong>tecnologia, programação e desenvolvimento digital</strong>. 
         Estudo programação com foco em desenvolvimento de software e criação de soluções web, 
         buscando evoluir constantemente para entregar projetos cada vez melhores.
       </p>
-      <p>
+      <p data-i18n="about-p2">
         A <strong>Zenith We</strong> nasceu com a missão de oferecer soluções digitais 
         acessíveis e profissionais para pequenos negócios e empreendedores que desejam 
         crescer na internet.
@@ -648,25 +671,25 @@
         <span class="stack-pill">JavaScript</span>
         <span class="stack-pill">Python</span>
         <span class="stack-pill">Git / GitHub</span>
-        <span class="stack-pill">APIs de IA</span>
+        <span class="stack-pill" data-i18n="stack-ai">APIs de IA</span>
       </div>
     </div>
     <div class="about-numbers fade-up">
       <div class="about-num">
         <div class="num">3+</div>
-        <div class="num-label">Projetos Entregues</div>
+        <div class="num-label" data-i18n="num1">Projetos Entregues</div>
       </div>
       <div class="about-num">
         <div class="num">5</div>
-        <div class="num-label">Serviços Oferecidos</div>
+        <div class="num-label" data-i18n="num2">Serviços Oferecidos</div>
       </div>
       <div class="about-num">
         <div class="num">IA</div>
-        <div class="num-label">Integração Inteligente</div>
+        <div class="num-label" data-i18n="num3">Integração Inteligente</div>
       </div>
       <div class="about-num">
         <div class="num">∞</div>
-        <div class="num-label">Suporte Pós-entrega</div>
+        <div class="num-label" data-i18n="num4">Suporte Pós-entrega</div>
       </div>
     </div>
   </div>
@@ -674,53 +697,53 @@
 
 <!-- SERVICES -->
 <section id="services">
-  <div class="section-label fade-up">O Que Faço</div>
-  <h2 class="section-heading fade-up">SERVIÇOS</h2>
+  <div class="section-label fade-up" data-i18n="services-label">O Que Faço</div>
+  <h2 class="section-heading fade-up" data-i18n="services-heading">SERVIÇOS</h2>
   <div class="services-grid">
     <div class="service-card fade-up">
       <span class="service-icon">🌐</span>
-      <div class="service-title">SITES INSTITUCIONAIS</div>
-      <p class="service-desc">Sites profissionais para empresas, academias, lojas, restaurantes e prestadores de serviço com foco em credibilidade e conversão.</p>
+      <div class="service-title" data-i18n="s1-title">SITES INSTITUCIONAIS</div>
+      <p class="service-desc" data-i18n="s1-desc">Sites profissionais para empresas, academias, lojas, restaurantes e prestadores de serviço com foco em credibilidade e conversão.</p>
     </div>
     <div class="service-card fade-up">
       <span class="service-icon">🛒</span>
-      <div class="service-title">LOJAS VIRTUAIS</div>
-      <p class="service-desc">E-commerces com carrinho de compras, catálogo de produtos e integração com WhatsApp para vendas diretas e eficientes.</p>
+      <div class="service-title" data-i18n="s2-title">LOJAS VIRTUAIS</div>
+      <p class="service-desc" data-i18n="s2-desc">E-commerces com carrinho de compras, catálogo de produtos e integração com WhatsApp para vendas diretas e eficientes.</p>
     </div>
     <div class="service-card fade-up">
       <span class="service-icon">🤖</span>
-      <div class="service-title">INTEGRAÇÃO COM IA</div>
-      <p class="service-desc">Assistentes virtuais personalizados para atendimento ao cliente 24/7, integrando as mais avançadas APIs de Inteligência Artificial.</p>
+      <div class="service-title" data-i18n="s3-title">INTEGRAÇÃO COM IA</div>
+      <p class="service-desc" data-i18n="s3-desc">Assistentes virtuais personalizados para atendimento ao cliente 24/7, integrando as mais avançadas APIs de Inteligência Artificial.</p>
     </div>
     <div class="service-card fade-up">
       <span class="service-icon">📱</span>
-      <div class="service-title">LANDING PAGES</div>
-      <p class="service-desc">Páginas focadas em geração de leads e vendas, construídas com estrutura persuasiva e design otimizado para conversão.</p>
+      <div class="service-title" data-i18n="s4-title">LANDING PAGES</div>
+      <p class="service-desc" data-i18n="s4-desc">Páginas focadas em geração de leads e vendas, construídas com estrutura persuasiva e design otimizado para conversão.</p>
     </div>
     <div class="service-card fade-up">
       <span class="service-icon">⚡</span>
-      <div class="service-title">OTIMIZAÇÃO DE SITES</div>
-      <p class="service-desc">Melhorias de desempenho, velocidade e experiência do usuário para sites já existentes que precisam de uma revisão técnica e visual.</p>
+      <div class="service-title" data-i18n="s5-title">OTIMIZAÇÃO DE SITES</div>
+      <p class="service-desc" data-i18n="s5-desc">Melhorias de desempenho, velocidade e experiência do usuário para sites já existentes que precisam de uma revisão técnica e visual.</p>
     </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-label fade-up">Portfólio</div>
-  <h2 class="section-heading fade-up">PROJETOS</h2>
+  <div class="section-label fade-up" data-i18n="projects-label">Portfólio</div>
+  <h2 class="section-heading fade-up" data-i18n="projects-heading">PROJETOS</h2>
   <div class="projects-list">
 
     <a href="https://zenithwe.github.io/caferarum/" target="_blank" class="project-row fade-up">
       <div>
-        <div class="project-num">01 — E-COMMERCE</div>
+        <div class="project-num" data-i18n="p1-type">01 — E-COMMERCE</div>
         <div class="project-name">Caférarum</div>
-        <div class="project-desc">Loja virtual para venda de cafés com assistente de IA integrado.</div>
+        <div class="project-desc" data-i18n="p1-desc">Loja virtual para venda de cafés com assistente de IA integrado.</div>
       </div>
       <div class="project-tags">
-        <span class="project-tag">Carrinho</span>
-        <span class="project-tag">Pagamento Online</span>
-        <span class="project-tag">Assistente IA</span>
+        <span class="project-tag" data-i18n="tag-cart">Carrinho</span>
+        <span class="project-tag" data-i18n="tag-payment">Pagamento Online</span>
+        <span class="project-tag" data-i18n="tag-ai">Assistente IA</span>
         <span class="project-tag">WhatsApp</span>
       </div>
       <div class="project-arrow">↗</div>
@@ -728,30 +751,45 @@
 
     <a href="https://zenithwe.github.io/arckstore/#hero" target="_blank" class="project-row fade-up">
       <div>
-        <div class="project-num">02 — LOJA DIGITAL</div>
+        <div class="project-num" data-i18n="p2-type">02 — LOJA DIGITAL</div>
         <div class="project-name">Arck Store</div>
-        <div class="project-desc">Loja digital voltada para produtos e serviços gamers com painel admin.</div>
+        <div class="project-desc" data-i18n="p2-desc">Loja digital voltada para produtos e serviços gamers com painel admin.</div>
       </div>
       <div class="project-tags">
-        <span class="project-tag">Sistema de Produtos</span>
-        <span class="project-tag">Painel Admin</span>
+        <span class="project-tag" data-i18n="tag-products">Sistema de Produtos</span>
+        <span class="project-tag" data-i18n="tag-admin">Painel Admin</span>
         <span class="project-tag">Discord</span>
-        <span class="project-tag">Design Moderno</span>
+        <span class="project-tag" data-i18n="tag-design">Design Moderno</span>
       </div>
       <div class="project-arrow">↗</div>
     </a>
 
     <a href="https://zenithwe.github.io/academiareverence/" target="_blank" class="project-row fade-up">
       <div>
-        <div class="project-num">03 — SITE INSTITUCIONAL</div>
+        <div class="project-num" data-i18n="p3-type">03 — SITE INSTITUCIONAL</div>
         <div class="project-name">Academia Reverence</div>
-        <div class="project-desc">Site institucional para academia com apresentação de planos e contato direto.</div>
+        <div class="project-desc" data-i18n="p3-desc">Site institucional para academia com apresentação de planos e contato direto.</div>
       </div>
       <div class="project-tags">
-        <span class="project-tag">Planos</span>
-        <span class="project-tag">Galeria</span>
-        <span class="project-tag">Formulário</span>
+        <span class="project-tag" data-i18n="tag-plans">Planos</span>
+        <span class="project-tag" data-i18n="tag-gallery">Galeria</span>
+        <span class="project-tag" data-i18n="tag-form">Formulário</span>
         <span class="project-tag">WhatsApp</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+    <a href="https://zenithwe.github.io/lojadomystic/" target="_blank" class="project-row fade-up">
+      <div>
+        <div class="project-num" data-i18n="p4-type">04 — E-COMMERCE</div>
+        <div class="project-name">Loja do Mystic</div>
+        <div class="project-desc" data-i18n="p4-desc">Loja virtual completa com catálogo de produtos, carrinho e integração com WhatsApp.</div>
+      </div>
+      <div class="project-tags">
+        <span class="project-tag" data-i18n="tag-catalog">Catálogo</span>
+        <span class="project-tag" data-i18n="tag-cart">Carrinho</span>
+        <span class="project-tag">WhatsApp</span>
+        <span class="project-tag" data-i18n="tag-design">Design Moderno</span>
       </div>
       <div class="project-arrow">↗</div>
     </a>
@@ -761,27 +799,27 @@
 
 <!-- DIFFERENTIALS -->
 <section id="diferenciais">
-  <div class="section-label fade-up">Por que me Escolher</div>
-  <h2 class="section-heading fade-up">DIFERENCIAIS</h2>
+  <div class="section-label fade-up" data-i18n="diff-label">Por que me Escolher</div>
+  <h2 class="section-heading fade-up" data-i18n="diff-heading">DIFERENCIAIS</h2>
   <div class="diff-grid">
-    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text">Design moderno e profissional</div></div>
-    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text">Sites responsivos para celular e computador</div></div>
-    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text">Entrega rápida e pontual</div></div>
-    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text">Suporte completo pós-entrega</div></div>
-    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text">Integração com WhatsApp</div></div>
-    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text">Integração com Inteligência Artificial</div></div>
-    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text">Foco em experiência do usuário</div></div>
-    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text">Soluções acessíveis e profissionais</div></div>
+    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text" data-i18n="d1">Design moderno e profissional</div></div>
+    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text" data-i18n="d2">Sites responsivos para celular e computador</div></div>
+    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text" data-i18n="d3">Entrega rápida e pontual</div></div>
+    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text" data-i18n="d4">Suporte completo pós-entrega</div></div>
+    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text" data-i18n="d5">Integração com WhatsApp</div></div>
+    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text" data-i18n="d6">Integração com Inteligência Artificial</div></div>
+    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text" data-i18n="d7">Foco em experiência do usuário</div></div>
+    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text" data-i18n="d8">Soluções acessíveis e profissionais</div></div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contato">
+<section id="contato" data-bg-text="CONTATO">
   <div class="contact-grid">
     <div class="contact-left fade-up">
-      <div class="section-label">Vamos Conversar</div>
-      <h2 class="section-heading">INICIE SEU<br>PROJETO</h2>
-      <p>
+      <div class="section-label" data-i18n="contact-label">Vamos Conversar</div>
+      <h2 class="section-heading" data-i18n="contact-heading">INICIE SEU<br>PROJETO</h2>
+      <p data-i18n="contact-p">
         Pronto para levar seu negócio ao mais alto nível digital? 
         Entre em contato e vamos criar juntos a presença online 
         que o seu negócio merece.
@@ -797,37 +835,37 @@
         </a>
         <a href="#" class="contact-link">
           <span class="contact-link-icon">#</span>
-          Discord — mediante solicitação
+          <span data-i18n="contact-discord">Discord — mediante solicitação</span>
         </a>
       </div>
     </div>
     <div class="fade-up">
       <form class="contact-form" onsubmit="handleSubmit(event)">
         <div class="form-field">
-          <label>Seu Nome</label>
-          <input type="text" placeholder="Ex: João Silva" required>
+          <label data-i18n="form-name">Seu Nome</label>
+          <input type="text" data-i18n-placeholder="form-name-ph" placeholder="Ex: João Silva" required>
         </div>
         <div class="form-field">
-          <label>E-mail ou WhatsApp</label>
-          <input type="text" placeholder="Ex: joao@email.com ou (31) 9xxxx-xxxx" required>
+          <label data-i18n="form-contact">E-mail ou WhatsApp</label>
+          <input type="text" data-i18n-placeholder="form-contact-ph" placeholder="Ex: joao@email.com ou (31) 9xxxx-xxxx" required>
         </div>
         <div class="form-field">
-          <label>Tipo de Projeto</label>
+          <label data-i18n="form-project">Tipo de Projeto</label>
           <select>
-            <option value="">Selecione um serviço...</option>
-            <option>Site Institucional</option>
-            <option>Loja Virtual</option>
+            <option value="" data-i18n="form-select">Selecione um serviço...</option>
+            <option data-i18n="s1-title">Site Institucional</option>
+            <option data-i18n="s2-title">Loja Virtual</option>
             <option>Landing Page</option>
-            <option>Integração com IA</option>
-            <option>Otimização de Site</option>
-            <option>Outro</option>
+            <option data-i18n="s3-title">Integração com IA</option>
+            <option data-i18n="s5-title">Otimização de Site</option>
+            <option data-i18n="form-other">Outro</option>
           </select>
         </div>
         <div class="form-field">
-          <label>Mensagem</label>
-          <textarea rows="4" placeholder="Conte um pouco sobre seu negócio e o que precisa..."></textarea>
+          <label data-i18n="form-message">Mensagem</label>
+          <textarea rows="4" data-i18n-placeholder="form-msg-ph" placeholder="Conte um pouco sobre seu negócio e o que precisa..."></textarea>
         </div>
-        <button type="submit" class="form-submit">Enviar Mensagem →</button>
+        <button type="submit" class="form-submit" data-i18n="form-submit">Enviar Mensagem →</button>
       </form>
     </div>
   </div>
@@ -836,11 +874,206 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">ZENITH<span>.</span>WE</div>
-  <div class="footer-copy">© 2025 Zenith We — Sua presença digital no mais alto nível</div>
+  <div class="footer-copy" data-i18n="footer-copy">© 2025 Zenith We — Sua presença digital no mais alto nível</div>
 </footer>
 
 <script>
-  // Cursor
+  // ── TRANSLATIONS ─────────────────────────────
+  const translations = {
+    pt: {
+      'nav-about': 'Sobre',
+      'nav-services': 'Serviços',
+      'nav-projects': 'Projetos',
+      'nav-contact': 'Contato',
+      'nav-cta': 'WhatsApp →',
+      'hero-tag': 'Desenvolvimento Web — Minas Gerais, BR',
+      'hero-h1-line1': 'TRANSFORMANDO',
+      'hero-h1-line2': 'IDEIAS EM',
+      'hero-h1-line3': 'SITES',
+      'hero-h1-line4': 'PROFISSIONAIS',
+      'hero-sub': 'Olá, sou Mateus — fundador da Zenith We. Criamos sites modernos, rápidos e responsivos que geram credibilidade, atraem clientes e aumentam vendas.',
+      'hero-btn1': 'Ver Projetos',
+      'hero-btn2': 'Falar Comigo',
+      'scroll': 'Scroll',
+      'about-label': 'Sobre Mim',
+      'about-p1': 'Sou apaixonado por <strong>tecnologia, programação e desenvolvimento digital</strong>. Estudo programação com foco em desenvolvimento de software e criação de soluções web, buscando evoluir constantemente para entregar projetos cada vez melhores.',
+      'about-p2': 'A <strong>Zenith We</strong> nasceu com a missão de oferecer soluções digitais acessíveis e profissionais para pequenos negócios e empreendedores que desejam crescer na internet.',
+      'stack-ai': 'APIs de IA',
+      'num1': 'Projetos Entregues',
+      'num2': 'Serviços Oferecidos',
+      'num3': 'Integração Inteligente',
+      'num4': 'Suporte Pós-entrega',
+      'services-label': 'O Que Faço',
+      'services-heading': 'SERVIÇOS',
+      's1-title': 'SITES INSTITUCIONAIS',
+      's1-desc': 'Sites profissionais para empresas, academias, lojas, restaurantes e prestadores de serviço com foco em credibilidade e conversão.',
+      's2-title': 'LOJAS VIRTUAIS',
+      's2-desc': 'E-commerces com carrinho de compras, catálogo de produtos e integração com WhatsApp para vendas diretas e eficientes.',
+      's3-title': 'INTEGRAÇÃO COM IA',
+      's3-desc': 'Assistentes virtuais personalizados para atendimento ao cliente 24/7, integrando as mais avançadas APIs de Inteligência Artificial.',
+      's4-title': 'LANDING PAGES',
+      's4-desc': 'Páginas focadas em geração de leads e vendas, construídas com estrutura persuasiva e design otimizado para conversão.',
+      's5-title': 'OTIMIZAÇÃO DE SITES',
+      's5-desc': 'Melhorias de desempenho, velocidade e experiência do usuário para sites já existentes que precisam de uma revisão técnica e visual.',
+      'projects-label': 'Portfólio',
+      'projects-heading': 'PROJETOS',
+      'p1-type': '01 — E-COMMERCE',
+      'p1-desc': 'Loja virtual para venda de cafés com assistente de IA integrado.',
+      'p2-type': '02 — LOJA DIGITAL',
+      'p2-desc': 'Loja digital voltada para produtos e serviços gamers com painel admin.',
+      'p3-type': '03 — SITE INSTITUCIONAL',
+      'p3-desc': 'Site institucional para academia com apresentação de planos e contato direto.',
+      'p4-type': '04 — E-COMMERCE',
+      'p4-desc': 'Loja virtual completa com catálogo de produtos, carrinho e integração com WhatsApp.',
+      'tag-cart': 'Carrinho',
+      'tag-payment': 'Pagamento Online',
+      'tag-ai': 'Assistente IA',
+      'tag-products': 'Sistema de Produtos',
+      'tag-admin': 'Painel Admin',
+      'tag-design': 'Design Moderno',
+      'tag-plans': 'Planos',
+      'tag-gallery': 'Galeria',
+      'tag-form': 'Formulário',
+      'tag-catalog': 'Catálogo',
+      'diff-label': 'Por que me Escolher',
+      'diff-heading': 'DIFERENCIAIS',
+      'd1': 'Design moderno e profissional',
+      'd2': 'Sites responsivos para celular e computador',
+      'd3': 'Entrega rápida e pontual',
+      'd4': 'Suporte completo pós-entrega',
+      'd5': 'Integração com WhatsApp',
+      'd6': 'Integração com Inteligência Artificial',
+      'd7': 'Foco em experiência do usuário',
+      'd8': 'Soluções acessíveis e profissionais',
+      'contact-label': 'Vamos Conversar',
+      'contact-heading': 'INICIE SEU<br>PROJETO',
+      'contact-p': 'Pronto para levar seu negócio ao mais alto nível digital? Entre em contato e vamos criar juntos a presença online que o seu negócio merece.',
+      'contact-discord': 'Discord — mediante solicitação',
+      'form-name': 'Seu Nome',
+      'form-name-ph': 'Ex: João Silva',
+      'form-contact': 'E-mail ou WhatsApp',
+      'form-contact-ph': 'Ex: joao@email.com ou (31) 9xxxx-xxxx',
+      'form-project': 'Tipo de Projeto',
+      'form-select': 'Selecione um serviço...',
+      'form-message': 'Mensagem',
+      'form-msg-ph': 'Conte um pouco sobre seu negócio e o que precisa...',
+      'form-other': 'Outro',
+      'form-submit': 'Enviar Mensagem →',
+      'footer-copy': '© 2025 Zenith We — Sua presença digital no mais alto nível',
+    },
+    en: {
+      'nav-about': 'About',
+      'nav-services': 'Services',
+      'nav-projects': 'Projects',
+      'nav-contact': 'Contact',
+      'nav-cta': 'WhatsApp →',
+      'hero-tag': 'Web Development — Minas Gerais, BR',
+      'hero-h1-line1': 'TURNING',
+      'hero-h1-line2': 'IDEAS INTO',
+      'hero-h1-line3': 'PROFESSIONAL',
+      'hero-h1-line4': 'WEBSITES',
+      'hero-sub': "Hi, I'm Mateus — founder of Zenith We. We build modern, fast and responsive websites that generate credibility, attract clients and boost sales.",
+      'hero-btn1': 'See Projects',
+      'hero-btn2': 'Talk to Me',
+      'scroll': 'Scroll',
+      'about-label': 'About Me',
+      'about-p1': 'I am passionate about <strong>technology, programming and digital development</strong>. I study software development and web solutions, constantly evolving to deliver better and better projects.',
+      'about-p2': '<strong>Zenith We</strong> was born with the mission of offering affordable and professional digital solutions for small businesses and entrepreneurs who want to grow online.',
+      'stack-ai': 'AI APIs',
+      'num1': 'Projects Delivered',
+      'num2': 'Services Offered',
+      'num3': 'Smart Integration',
+      'num4': 'Post-delivery Support',
+      'services-label': 'What I Do',
+      'services-heading': 'SERVICES',
+      's1-title': 'INSTITUTIONAL WEBSITES',
+      's1-desc': 'Professional websites for companies, gyms, shops, restaurants and service providers focused on credibility and conversion.',
+      's2-title': 'ONLINE STORES',
+      's2-desc': 'E-commerce with shopping cart, product catalog and WhatsApp integration for direct and efficient sales.',
+      's3-title': 'AI INTEGRATION',
+      's3-desc': 'Custom virtual assistants for 24/7 customer support, integrating the most advanced Artificial Intelligence APIs.',
+      's4-title': 'LANDING PAGES',
+      's4-desc': 'Pages focused on lead generation and sales, built with a persuasive structure and design optimized for conversion.',
+      's5-title': 'WEBSITE OPTIMIZATION',
+      's5-desc': 'Performance, speed and user experience improvements for existing websites that need a technical and visual overhaul.',
+      'projects-label': 'Portfolio',
+      'projects-heading': 'PROJECTS',
+      'p1-type': '01 — E-COMMERCE',
+      'p1-desc': 'Online coffee shop with an integrated AI assistant.',
+      'p2-type': '02 — DIGITAL STORE',
+      'p2-desc': 'Digital store for gaming products and services with an admin panel.',
+      'p3-type': '03 — INSTITUTIONAL SITE',
+      'p3-desc': 'Institutional website for a gym showcasing plans and direct contact.',
+      'p4-type': '04 — E-COMMERCE',
+      'p4-desc': 'Full online store with product catalog, shopping cart and WhatsApp integration.',
+      'tag-cart': 'Cart',
+      'tag-payment': 'Online Payment',
+      'tag-ai': 'AI Assistant',
+      'tag-products': 'Product System',
+      'tag-admin': 'Admin Panel',
+      'tag-design': 'Modern Design',
+      'tag-plans': 'Plans',
+      'tag-gallery': 'Gallery',
+      'tag-form': 'Form',
+      'tag-catalog': 'Catalog',
+      'diff-label': 'Why Choose Me',
+      'diff-heading': 'HIGHLIGHTS',
+      'd1': 'Modern and professional design',
+      'd2': 'Responsive for mobile and desktop',
+      'd3': 'Fast and on-time delivery',
+      'd4': 'Full post-delivery support',
+      'd5': 'WhatsApp integration',
+      'd6': 'Artificial Intelligence integration',
+      'd7': 'Focus on user experience',
+      'd8': 'Affordable and professional solutions',
+      'contact-label': "Let's Talk",
+      'contact-heading': 'START YOUR<br>PROJECT',
+      'contact-p': 'Ready to take your business to the highest digital level? Get in touch and let\'s build together the online presence your business deserves.',
+      'contact-discord': 'Discord — upon request',
+      'form-name': 'Your Name',
+      'form-name-ph': 'Ex: John Smith',
+      'form-contact': 'Email or WhatsApp',
+      'form-contact-ph': 'Ex: john@email.com or +1 (555) ...',
+      'form-project': 'Project Type',
+      'form-select': 'Select a service...',
+      'form-message': 'Message',
+      'form-msg-ph': 'Tell us a bit about your business and what you need...',
+      'form-other': 'Other',
+      'form-submit': 'Send Message →',
+      'footer-copy': '© 2025 Zenith We — Your digital presence at the highest level',
+    }
+  };
+
+  let currentLang = 'pt';
+
+  function toggleLang() {
+    currentLang = currentLang === 'pt' ? 'en' : 'pt';
+    applyTranslations();
+    document.getElementById('langFlag').textContent = currentLang === 'pt' ? '🇺🇸' : '🇧🇷';
+    document.documentElement.lang = currentLang === 'pt' ? 'pt-BR' : 'en';
+
+    // Update contact section bg text
+    const contactSec = document.getElementById('contato');
+    contactSec.setAttribute('data-bg-text', currentLang === 'pt' ? 'CONTATO' : 'CONTACT');
+  }
+
+  function applyTranslations() {
+    const t = translations[currentLang];
+
+    // Text nodes
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+
+    // Placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
+    });
+  }
+
+  // ── CURSOR ───────────────────────────────────
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursor-ring');
   let mx = 0, my = 0, rx = 0, ry = 0;
@@ -858,7 +1091,7 @@
   }
   animRing();
 
-  // Fade in on scroll
+  // ── FADE IN ON SCROLL ────────────────────────
   const observer = new IntersectionObserver(entries => {
     entries.forEach((e, i) => {
       if (e.isIntersecting) {
@@ -874,11 +1107,13 @@
     el.style.transitionDelay = (i * 0.05) + 's';
   });
 
-  // Form submit redirect to WhatsApp
+  // ── FORM SUBMIT ──────────────────────────────
   function handleSubmit(e) {
     e.preventDefault();
     const name = e.target.querySelector('input[type=text]').value;
-    const msg = encodeURIComponent(`Olá Mateus! Sou ${name} e vim pelo seu portfólio. Gostaria de conversar sobre um projeto.`);
+    const msg = currentLang === 'pt'
+      ? encodeURIComponent(`Olá Mateus! Sou ${name} e vim pelo seu portfólio. Gostaria de conversar sobre um projeto.`)
+      : encodeURIComponent(`Hi Mateus! I'm ${name} and I found you through your portfolio. I'd like to talk about a project.`);
     window.open(`https://wa.me/5531996378666?text=${msg}`, '_blank');
   }
 </script>
