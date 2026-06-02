@@ -825,9 +825,9 @@
         que o seu negócio merece.
       </p>
       <div class="contact-links">
-        <a href="mailto:contato@zenithwe.com" class="contact-link">
+        <a href="mailto:1zenithwe@gmail.com" class="contact-link">
           <span class="contact-link-icon">@</span>
-          contato@zenithwe.com
+          1zenithwe@gmail.com
         </a>
         <a href="https://wa.me/5531996378666" target="_blank" class="contact-link">
           <span class="contact-link-icon">W</span>
@@ -1028,7 +1028,7 @@
       'd8': 'Affordable and professional solutions',
       'contact-label': "Let's Talk",
       'contact-heading': 'START YOUR<br>PROJECT',
-      'contact-p': 'Ready to take your business to the highest digital level? Get in touch and let\'s build together the online presence your business deserves.',
+      'contact-p': "Ready to take your business to the highest digital level? Get in touch and let's build together the online presence your business deserves.",
       'contact-discord': 'Discord — upon request',
       'form-name': 'Your Name',
       'form-name-ph': 'Ex: John Smith',
@@ -1052,7 +1052,6 @@
     document.getElementById('langFlag').textContent = currentLang === 'pt' ? 'US' : 'BR';
     document.documentElement.lang = currentLang === 'pt' ? 'pt-BR' : 'en';
 
-    // Update contact section bg text
     const contactSec = document.getElementById('contato');
     contactSec.setAttribute('data-bg-text', currentLang === 'pt' ? 'CONTATO' : 'CONTACT');
   }
@@ -1060,13 +1059,11 @@
   function applyTranslations() {
     const t = translations[currentLang];
 
-    // Text nodes
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (t[key] !== undefined) el.innerHTML = t[key];
     });
 
-    // Placeholders
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
       const key = el.getAttribute('data-i18n-placeholder');
       if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
@@ -1102,7 +1099,6 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // Stagger children in grids
   document.querySelectorAll('.services-grid .service-card, .diff-grid .diff-item').forEach((el, i) => {
     el.style.transitionDelay = (i * 0.05) + 's';
   });
