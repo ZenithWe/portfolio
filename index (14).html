@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zenith We — Presença Digital no Mais Alto Nível</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07080A;
+    --surface: #0F1117;
+    --surface2: #161820;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #F0EEE8;
+    --muted: #8B8A84;
+    --accent: #C8F542;
+    --accent2: #7DF5C0;
+    --accent3: #F5C842;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── CURSOR ─────────────────────────────── */
+  .cursor {
+    position: fixed;
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.18s ease, width 0.2s, height 0.2s;
+    mix-blend-mode: difference;
+    opacity: 0.6;
+  }
+
+  /* ── NAV ─────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(7,8,10,0.85);
+    backdrop-filter: blur(14px);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-right {
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+
+  /* ── LANG TOGGLE ───────────────────────── */
+  .lang-toggle {
+    background: transparent;
+    border: 1px solid var(--border2);
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1;
+  }
+  .lang-toggle:hover { border-color: var(--text); transform: translateY(-1px); }
+  .lang-toggle .lang-flag { font-size: 0.7rem; font-family: var(--font-mono); letter-spacing: 0.05em; font-weight: 500; color: var(--text); display: block; }
+
+  .nav-cta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: var(--bg);
+    background: var(--accent);
+    border: none;
+    padding: 0.55rem 1.2rem;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* ── HERO ────────────────────────────────── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 8rem 3rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(200,245,66,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,245,66,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridFloat 20s linear infinite;
+  }
+  @keyframes gridFloat {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(60px); }
+  }
+  .hero-bg-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-display);
+    font-size: clamp(120px, 18vw, 260px);
+    color: rgba(255,255,255,0.02);
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+    user-select: none;
+    pointer-events: none;
+  }
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 2rem; height: 1px;
+    background: var(--accent);
+  }
+  .hero-heading {
+    font-family: var(--font-display);
+    font-size: clamp(64px, 10vw, 140px);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    position: relative; z-index: 1;
+  }
+  .hero-heading .line-accent { color: var(--accent); }
+  .hero-sub {
+    margin-top: 2.5rem;
+    max-width: 480px;
+    font-size: 1rem;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.75;
+    position: relative; z-index: 1;
+  }
+  .hero-actions {
+    margin-top: 3rem;
+    display: flex; gap: 1rem; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .btn-primary {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--accent);
+    border: none;
+    padding: 0.9rem 2rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.15s, opacity 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+  .btn-outline {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--border2);
+    padding: 0.9rem 2rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--text); }
+
+  .hero-scroll {
+    position: absolute;
+    right: 3rem; bottom: 3rem;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    writing-mode: vertical-rl;
+  }
+  .hero-scroll::after {
+    content: '';
+    width: 1px; height: 3rem;
+    background: linear-gradient(to bottom, var(--muted), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* ── SECTIONS ─────────────────────────────── */
+  section { padding: 7rem 3rem; }
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 1.5rem; height: 1px;
+    background: var(--accent);
+  }
+  .section-heading {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    margin-bottom: 3rem;
+  }
+
+  /* ── ABOUT ─────────────────────────────────── */
+  #about { border-top: 1px solid var(--border); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .about-text p {
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .about-stack {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-top: 2rem;
+  }
+  .stack-pill {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    border: 1px solid rgba(200,245,66,0.25);
+    padding: 0.35rem 0.8rem;
+    background: rgba(200,245,66,0.05);
+  }
+  .about-numbers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--border);
+  }
+  .about-num {
+    background: var(--surface);
+    padding: 2.5rem 2rem;
+  }
+  .about-num .num {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .about-num .num-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── SERVICES ──────────────────────────────── */
+  #services { border-top: 1px solid var(--border); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+  }
+  .service-card {
+    background: var(--surface);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .service-card:hover { background: var(--surface2); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+  .service-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .service-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  /* ── PROJECTS ──────────────────────────────── */
+  #projects { border-top: 1px solid var(--border); }
+  .projects-list { display: flex; flex-direction: column; gap: 1.5px; background: var(--border); }
+  .project-row {
+    background: var(--surface);
+    display: grid;
+    grid-template-columns: 3fr 2fr auto;
+    align-items: center;
+    gap: 2rem;
+    padding: 2.5rem 2.5rem;
+    transition: background 0.25s;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-row::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s ease;
+  }
+  .project-row:hover { background: var(--surface2); }
+  .project-row:hover::after { transform: scaleY(1); }
+  .project-num {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+  .project-name {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    transition: color 0.2s;
+  }
+  .project-row:hover .project-name { color: var(--accent); }
+  .project-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .project-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    color: var(--accent2);
+    border: 1px solid rgba(125,245,192,0.2);
+    padding: 0.3rem 0.6rem;
+    background: rgba(125,245,192,0.05);
+  }
+  .project-arrow {
+    font-size: 1.5rem;
+    color: var(--muted);
+    transition: transform 0.25s, color 0.25s;
+  }
+  .project-row:hover .project-arrow { transform: translate(4px, -4px); color: var(--accent); }
+
+  /* ── DIFFERENTIALS ─────────────────────────── */
+  #diferenciais { border-top: 1px solid var(--border); }
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+  }
+  .diff-item {
+    background: var(--surface);
+    padding: 2rem 1.5rem;
+    display: flex; align-items: flex-start; gap: 1rem;
+    transition: background 0.2s;
+  }
+  .diff-item:hover { background: var(--surface2); }
+  .diff-check {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    background: rgba(200,245,66,0.1);
+    border: 1px solid rgba(200,245,66,0.2);
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .diff-text {
+    font-size: 0.875rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* ── CONTACT ───────────────────────────────── */
+  #contato {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    position: relative; overflow: hidden;
+  }
+  #contato::before {
+    content: attr(data-bg-text);
+    position: absolute;
+    bottom: -2rem; right: -1rem;
+    font-family: var(--font-display);
+    font-size: clamp(100px, 14vw, 180px);
+    color: rgba(255,255,255,0.025);
+    pointer-events: none;
+    letter-spacing: 0.05em;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .contact-left p {
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.875rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+  .contact-link:hover { color: var(--text); border-color: var(--border2); background: var(--surface2); }
+  .contact-link-icon {
+    font-size: 1rem;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    width: 24px;
+    text-align: center;
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-field label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .form-field input,
+  .form-field textarea,
+  .form-field select {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.8rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+  .form-field input:focus,
+  .form-field textarea:focus,
+  .form-field select:focus { border-color: var(--accent); }
+  .form-field select option { background: var(--surface); }
+  .form-submit {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--accent);
+    border: none;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: transform 0.15s, opacity 0.15s;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover { transform: translateY(-2px); opacity: 0.9; }
+  .form-submit:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+  .form-status {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    margin-top: 0.85rem;
+    min-height: 1.2em;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .form-status.is-visible { opacity: 1; transform: translateY(0); }
+  .form-status.is-success { color: var(--accent); }
+  .form-status.is-error { color: #ff8a8a; }
+
+  /* ── FOOTER ─────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .footer-logo span { color: var(--accent); }
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+
+  /* ── ANIMATIONS ─────────────────────────────── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── PROJECT PREVIEW (hover follow-cursor) ──── */
+  .project-preview {
+    position: fixed;
+    top: 0; left: 0;
+    width: 360px;
+    height: 252px;
+    pointer-events: none;
+    z-index: 500;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(0, 0, 0) scale(0.92) rotate(-1.2deg);
+    transition:
+      opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0.45s;
+    will-change: transform, opacity;
+  }
+  .project-preview.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  .project-preview-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border2);
+    background: var(--surface2);
+    box-shadow:
+      0 30px 60px -20px rgba(0,0,0,0.65),
+      0 10px 24px -8px rgba(0,0,0,0.5),
+      0 0 0 1px rgba(255,255,255,0.03) inset;
+  }
+  /* glass blur layer behind the image while it loads / as ambient backdrop */
+  .project-preview-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(145deg, var(--surface2), var(--surface));
+    backdrop-filter: blur(18px);
+    z-index: 0;
+  }
+  .project-preview-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    opacity: 0;
+    transform: scale(1.06);
+    transition: opacity 0.5s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+  }
+  .project-preview-img.is-loaded {
+    opacity: 1;
+    transform: scale(1);
+  }
+  /* subtle top sheen for a premium glass finish */
+  .project-preview-inner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(165deg, rgba(255,255,255,0.08), rgba(255,255,255,0) 40%);
+    z-index: 2;
+    pointer-events: none;
+  }
+  .project-preview-tag {
+    position: absolute;
+    left: 14px; bottom: 14px;
+    z-index: 3;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 0.3rem 0.65rem;
+    border-radius: 3px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.35s ease 0.05s, transform 0.35s ease 0.05s;
+  }
+  .project-preview.is-active .project-preview-tag {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (max-width: 1100px) {
+    .project-preview { width: 300px; height: 210px; }
+  }
+
+  /* ── RESPONSIVE ─────────────────────────────── */
+  @media (max-width: 860px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem; }
+    #hero { padding: 7rem 1.5rem 4rem; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .project-row { grid-template-columns: 1fr; gap: 1rem; padding: 1.75rem; }
+    .project-arrow { display: none; }
+    footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    .cursor, .cursor-ring { display: none; }
+    .project-preview { display: none; }
+  }
+  @media (hover: none) and (pointer: coarse) {
+    .project-preview { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<div class="project-preview" id="project-preview">
+  <div class="project-preview-inner">
+    <img class="project-preview-img" id="project-preview-img" alt="">
+    <span class="project-preview-tag" id="project-preview-tag">Ver projeto ↗</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">ZENITH<span>.</span>WE</a>
+  <ul class="nav-links">
+    <li><a href="#about" data-i18n="nav-about">Sobre</a></li>
+    <li><a href="#services" data-i18n="nav-services">Serviços</a></li>
+    <li><a href="#projects" data-i18n="nav-projects">Projetos</a></li>
+    <li><a href="#contato" data-i18n="nav-contact">Contato</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang-toggle" id="langBtn" onclick="toggleLang()" aria-label="Switch language">
+      <span class="lang-flag" id="langFlag">US</span>
+    </button>
+    <a href="https://wa.me/5531986370212" target="_blank" class="nav-cta" data-i18n="nav-cta">WhatsApp →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-bg-text">ZENITH</div>
+
+  <div class="hero-tag" data-i18n="hero-tag">Desenvolvimento Web — Minas Gerais, BR</div>
+
+  <h1 class="hero-heading fade-up">
+    <span data-i18n="hero-h1-line1">TRANSFORMANDO</span><br>
+    <span data-i18n="hero-h1-line2">IDEIAS EM</span><br>
+    <span class="line-accent" data-i18n="hero-h1-line3">SITES</span><br>
+    <span data-i18n="hero-h1-line4">PROFISSIONAIS</span>
+  </h1>
+
+  <p class="hero-sub fade-up" data-i18n="hero-sub">
+    Olá, sou Mateus — fundador da Zenith We. Criamos sites modernos, 
+    rápidos e responsivos que geram credibilidade, atraem clientes 
+    e aumentam vendas.
+  </p>
+
+  <div class="hero-actions fade-up">
+    <a href="#projects" class="btn-primary" data-i18n="hero-btn1">Ver Projetos</a>
+    <a href="#contato" class="btn-outline" data-i18n="hero-btn2">Falar Comigo</a>
+  </div>
+
+  <div class="hero-scroll" data-i18n="scroll">Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <div class="section-label" data-i18n="about-label">Sobre Mim</div>
+      <h2 class="section-heading">MATEUS,<br>DEV & FOUNDER</h2>
+      <p data-i18n="about-p1">
+        Sou apaixonado por <strong>tecnologia, programação e desenvolvimento digital</strong>. 
+        Estudo programação com foco em desenvolvimento de software e criação de soluções web, 
+        buscando evoluir constantemente para entregar projetos cada vez melhores.
+      </p>
+      <p data-i18n="about-p2">
+        A <strong>Zenith We</strong> nasceu com a missão de oferecer soluções digitais 
+        acessíveis e profissionais para pequenos negócios e empreendedores que desejam 
+        crescer na internet.
+      </p>
+      <div class="about-stack">
+        <span class="stack-pill">HTML5</span>
+        <span class="stack-pill">CSS3</span>
+        <span class="stack-pill">JavaScript</span>
+        <span class="stack-pill">Python</span>
+        <span class="stack-pill">Git / GitHub</span>
+        <span class="stack-pill" data-i18n="stack-ai">APIs de IA</span>
+      </div>
+    </div>
+    <div class="about-numbers fade-up">
+      <div class="about-num">
+        <div class="num">3+</div>
+        <div class="num-label" data-i18n="num1">Projetos Entregues</div>
+      </div>
+      <div class="about-num">
+        <div class="num">5</div>
+        <div class="num-label" data-i18n="num2">Serviços Oferecidos</div>
+      </div>
+      <div class="about-num">
+        <div class="num">IA</div>
+        <div class="num-label" data-i18n="num3">Integração Inteligente</div>
+      </div>
+      <div class="about-num">
+        <div class="num">∞</div>
+        <div class="num-label" data-i18n="num4">Suporte Pós-entrega</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label fade-up" data-i18n="services-label">O Que Faço</div>
+  <h2 class="section-heading fade-up" data-i18n="services-heading">SERVIÇOS</h2>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <span class="service-icon">🌐</span>
+      <div class="service-title" data-i18n="s1-title">SITES INSTITUCIONAIS</div>
+      <p class="service-desc" data-i18n="s1-desc">Sites profissionais para empresas, academias, lojas, restaurantes e prestadores de serviço com foco em credibilidade e conversão.</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-icon">🛒</span>
+      <div class="service-title" data-i18n="s2-title">LOJAS VIRTUAIS</div>
+      <p class="service-desc" data-i18n="s2-desc">E-commerces com carrinho de compras, catálogo de produtos e integração com WhatsApp para vendas diretas e eficientes.</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-icon">🤖</span>
+      <div class="service-title" data-i18n="s3-title">INTEGRAÇÃO COM IA</div>
+      <p class="service-desc" data-i18n="s3-desc">Assistentes virtuais personalizados para atendimento ao cliente 24/7, integrando as mais avançadas APIs de Inteligência Artificial.</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-icon">📱</span>
+      <div class="service-title" data-i18n="s4-title">LANDING PAGES</div>
+      <p class="service-desc" data-i18n="s4-desc">Páginas focadas em geração de leads e vendas, construídas com estrutura persuasiva e design otimizado para conversão.</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-icon">⚡</span>
+      <div class="service-title" data-i18n="s5-title">OTIMIZAÇÃO DE SITES</div>
+      <p class="service-desc" data-i18n="s5-desc">Melhorias de desempenho, velocidade e experiência do usuário para sites já existentes que precisam de uma revisão técnica e visual.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label fade-up" data-i18n="projects-label">Portfólio</div>
+  <h2 class="section-heading fade-up" data-i18n="projects-heading">PROJETOS</h2>
+  <div class="projects-list">
+
+    <a href="https://zenithwe.github.io/caferarum/" target="_blank" class="project-row fade-up" data-preview="https://s0.wp.com/mshots/v1/https%3A%2F%2Fzenithwe.github.io%2Fcaferarum%2F?w=1000&h=700" data-preview-color="#C8F542">
+      <div>
+        <div class="project-num" data-i18n="p1-type">01 — E-COMMERCE</div>
+        <div class="project-name">Caférarum</div>
+        <div class="project-desc" data-i18n="p1-desc">Loja virtual para venda de cafés com assistente de IA integrado.</div>
+      </div>
+      <div class="project-tags">
+        <span class="project-tag" data-i18n="tag-cart">Carrinho</span>
+        <span class="project-tag" data-i18n="tag-payment">Pagamento Online</span>
+        <span class="project-tag" data-i18n="tag-ai">Assistente IA</span>
+        <span class="project-tag">WhatsApp</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+    <a href="https://zenithwe.github.io/arckstore/#hero" target="_blank" class="project-row fade-up" data-preview="https://s0.wp.com/mshots/v1/https%3A%2F%2Fzenithwe.github.io%2Farckstore%2F%23hero?w=1000&h=700" data-preview-color="#7DF5C0">
+      <div>
+        <div class="project-num" data-i18n="p2-type">02 — LOJA DIGITAL</div>
+        <div class="project-name">Arck Store</div>
+        <div class="project-desc" data-i18n="p2-desc">Loja digital voltada para produtos e serviços gamers com painel admin.</div>
+      </div>
+      <div class="project-tags">
+        <span class="project-tag" data-i18n="tag-products">Sistema de Produtos</span>
+        <span class="project-tag" data-i18n="tag-admin">Painel Admin</span>
+        <span class="project-tag">Discord</span>
+        <span class="project-tag" data-i18n="tag-design">Design Moderno</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+    <a href="https://zenithwe.github.io/academiareverence/" target="_blank" class="project-row fade-up" data-preview="https://s0.wp.com/mshots/v1/https%3A%2F%2Fzenithwe.github.io%2Facademiareverence%2F?w=1000&h=700" data-preview-color="#F5C842">
+      <div>
+        <div class="project-num" data-i18n="p3-type">03 — SITE INSTITUCIONAL</div>
+        <div class="project-name">Academia Reverence</div>
+        <div class="project-desc" data-i18n="p3-desc">Site institucional para academia com apresentação de planos e contato direto.</div>
+      </div>
+      <div class="project-tags">
+        <span class="project-tag" data-i18n="tag-plans">Planos</span>
+        <span class="project-tag" data-i18n="tag-gallery">Galeria</span>
+        <span class="project-tag" data-i18n="tag-form">Formulário</span>
+        <span class="project-tag">WhatsApp</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+   <a href="https://zenithwe.github.io/biggbarbearia/" target="_blank" class="project-row fade-up" data-preview="https://s0.wp.com/mshots/v1/https%3A%2F%2Fzenithwe.github.io%2Fbiggbarbearia%2F?w=1000&h=700" data-preview-color="#C8F542">
+  <div>
+    <div class="project-num">05 — SITE INSTITUCIONAL</div>
+    <div class="project-name">Bigg Barbearia</div>
+    <div class="project-desc">Site profissional para barbearia com foco em agendamentos e contato direto.</div>
+  </div>
+  <div class="project-tags">
+    <span class="project-tag">Agendamento</span>
+    <span class="project-tag">WhatsApp</span>
+    <span class="project-tag">Design Moderno</span>
+  </div>
+  <div class="project-arrow">↗</div>
+</a>
+
+<a href="https://zenithwe.github.io/coachstanley/" target="_blank" class="project-row fade-up" data-preview="https://s0.wp.com/mshots/v1/https%3A%2F%2Fzenithwe.github.io%2Fcoachstanley%2F?w=1000&h=700" data-preview-color="#7DF5C0">
+  <div>
+    <div class="project-num">06 — LANDING PAGE</div>
+    <div class="project-name">Coach Stanley</div>
+    <div class="project-desc">Landing page focada em conversão e captação de clientes para mentoria.</div>
+  </div>
+  <div class="project-tags">
+    <span class="project-tag">Conversão</span>
+    <span class="project-tag">Leads</span>
+    <span class="project-tag">Copywriting</span>
+  </div>
+  <div class="project-arrow">↗</div>
+</a>
+
+<a href="https://zenithwe.github.io/coachdiaspaulin/#" target="_blank" class="project-row fade-up" data-preview="https://s0.wp.com/mshots/v1/https%3A%2F%2Fzenithwe.github.io%2Fcoachdiaspaulin%2F?w=1000&h=700" data-preview-color="#F5C842">
+  <div>
+    <div class="project-num">07 — LANDING PAGE</div>
+    <div class="project-name">Coach Diaspaulin</div>
+    <div class="project-desc">Página estratégica para apresentação de serviços e geração de autoridade.</div>
+  </div>
+  <div class="project-tags">
+    <span class="project-tag">Autoridade</span>
+    <span class="project-tag">Personal Branding</span>
+    <span class="project-tag">WhatsApp</span>
+  </div>
+  <div class="project-arrow">↗</div>
+</a>
+  
+    <a href="https://zenithwe.github.io/lojadomystic/" target="_blank" class="project-row fade-up" data-preview="https://s0.wp.com/mshots/v1/https%3A%2F%2Fzenithwe.github.io%2Flojadomystic%2F?w=1000&h=700" data-preview-color="#C8F542">
+      <div>
+        <div class="project-num" data-i18n="p4-type">04 — E-COMMERCE</div>
+        <div class="project-name">Loja do Mystic</div>
+        <div class="project-desc" data-i18n="p4-desc">Loja virtual completa com catálogo de produtos, carrinho e integração com WhatsApp.</div>
+      </div>
+      <div class="project-tags">
+        <span class="project-tag" data-i18n="tag-catalog">Catálogo</span>
+        <span class="project-tag" data-i18n="tag-cart">Carrinho</span>
+        <span class="project-tag">WhatsApp</span>
+        <span class="project-tag" data-i18n="tag-design">Design Moderno</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+<a href="https://zenithwe.github.io/salaotransformacao/" target="_blank" class="project-row fade-up" data-preview="https://s0.wp.com/mshots/v1/https%3A%2F%2Fzenithwe.github.io%2Fsalaotransformacao%2F?w=1000&h=700" data-preview-color="#7DF5C0">
+  <div>
+    <div class="project-num">08 — SITE INSTITUCIONAL</div>
+    <div class="project-name">Salão Transformação</div>
+    <div class="project-desc">Site institucional para salão de beleza com apresentação de serviços e contato direto.</div>
+  </div>
+  <div class="project-tags">
+    <span class="project-tag">Agendamento</span>
+    <span class="project-tag">WhatsApp</span>
+    <span class="project-tag">Design Moderno</span>
+  </div>
+  <div class="project-arrow">↗</div>
+</a>
+
+  </div>
+</section>
+
+<!-- DIFFERENTIALS -->
+<section id="diferenciais">
+  <div class="section-label fade-up" data-i18n="diff-label">Por que me Escolher</div>
+  <h2 class="section-heading fade-up" data-i18n="diff-heading">DIFERENCIAIS</h2>
+  <div class="diff-grid">
+    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text" data-i18n="d1">Design moderno e profissional</div></div>
+    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text" data-i18n="d2">Sites responsivos para celular e computador</div></div>
+    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text" data-i18n="d3">Entrega rápida e pontual</div></div>
+    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text" data-i18n="d4">Suporte completo pós-entrega</div></div>
+    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text" data-i18n="d5">Integração com WhatsApp</div></div>
+    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text" data-i18n="d6">Integração com Inteligência Artificial</div></div>
+    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text" data-i18n="d7">Foco em experiência do usuário</div></div>
+    <div class="diff-item fade-up"><div class="diff-check">✓</div><div class="diff-text" data-i18n="d8">Soluções acessíveis e profissionais</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contato" data-bg-text="CONTATO">
+  <div class="contact-grid">
+    <div class="contact-left fade-up">
+      <div class="section-label" data-i18n="contact-label">Vamos Conversar</div>
+      <h2 class="section-heading" data-i18n="contact-heading">INICIE SEU<br>PROJETO</h2>
+      <p data-i18n="contact-p">
+        Pronto para levar seu negócio ao mais alto nível digital? 
+        Entre em contato e vamos criar juntos a presença online 
+        que o seu negócio merece.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:1zenithwe@gmail.com" class="contact-link">
+          <span class="contact-link-icon">@</span>
+          1zenithwe@gmail.com
+        </a>
+        <a href="https://wa.me/5531986370212" target="_blank" class="contact-link">
+          <span class="contact-link-icon">W</span>
+          (31) 98637-0212
+        </a>
+        <a href="#" class="contact-link">
+          <span class="contact-link-icon">#</span>
+          <span data-i18n="contact-discord">Discord — mediante solicitação</span>
+        </a>
+      </div>
+    </div>
+    <div class="fade-up">
+      <form class="contact-form" id="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-field">
+          <label data-i18n="form-name">Seu Nome</label>
+          <input type="text" name="nome" data-i18n-placeholder="form-name-ph" placeholder="Ex: João Silva" required>
+        </div>
+        <div class="form-field">
+          <label data-i18n="form-contact">E-mail ou WhatsApp</label>
+          <input type="text" name="contato" data-i18n-placeholder="form-contact-ph" placeholder="Ex: joao@email.com ou (31) 9xxxx-xxxx" required>
+        </div>
+        <div class="form-field">
+          <label data-i18n="form-project">Tipo de Projeto</label>
+          <select name="tipo_de_projeto">
+            <option value="" data-i18n="form-select">Selecione um serviço...</option>
+            <option data-i18n="s1-title">Site Institucional</option>
+            <option data-i18n="s2-title">Loja Virtual</option>
+            <option>Landing Page</option>
+            <option data-i18n="s3-title">Integração com IA</option>
+            <option data-i18n="s5-title">Otimização de Site</option>
+            <option data-i18n="form-other">Outro</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label data-i18n="form-message">Mensagem</label>
+          <textarea name="mensagem" rows="4" data-i18n-placeholder="form-msg-ph" placeholder="Conte um pouco sobre seu negócio e o que precisa..."></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="form-submit-btn" data-i18n="form-submit">Enviar Mensagem →</button>
+        <p class="form-status" id="form-status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">ZENITH<span>.</span>WE</div>
+  <div class="footer-copy" data-i18n="footer-copy">© 2025 Zenith We — Sua presença digital no mais alto nível</div>
+</footer>
+
+<script>
+  // ── TRANSLATIONS ─────────────────────────────
+  const translations = {
+    pt: {
+      'nav-about': 'Sobre',
+      'nav-services': 'Serviços',
+      'nav-projects': 'Projetos',
+      'nav-contact': 'Contato',
+      'nav-cta': 'WhatsApp →',
+      'hero-tag': 'Desenvolvimento Web — Minas Gerais, BR',
+      'hero-h1-line1': 'TRANSFORMANDO',
+      'hero-h1-line2': 'IDEIAS EM',
+      'hero-h1-line3': 'SITES',
+      'hero-h1-line4': 'PROFISSIONAIS',
+      'hero-sub': 'Olá, sou Mateus — fundador da Zenith We. Criamos sites modernos, rápidos e responsivos que geram credibilidade, atraem clientes e aumentam vendas.',
+      'hero-btn1': 'Ver Projetos',
+      'hero-btn2': 'Falar Comigo',
+      'scroll': 'Scroll',
+      'about-label': 'Sobre Mim',
+      'about-p1': 'Sou apaixonado por <strong>tecnologia, programação e desenvolvimento digital</strong>. Estudo programação com foco em desenvolvimento de software e criação de soluções web, buscando evoluir constantemente para entregar projetos cada vez melhores.',
+      'about-p2': 'A <strong>Zenith We</strong> nasceu com a missão de oferecer soluções digitais acessíveis e profissionais para pequenos negócios e empreendedores que desejam crescer na internet.',
+      'stack-ai': 'APIs de IA',
+      'num1': 'Projetos Entregues',
+      'num2': 'Serviços Oferecidos',
+      'num3': 'Integração Inteligente',
+      'num4': 'Suporte Pós-entrega',
+      'services-label': 'O Que Faço',
+      'services-heading': 'SERVIÇOS',
+      's1-title': 'SITES INSTITUCIONAIS',
+      's1-desc': 'Sites profissionais para empresas, academias, lojas, restaurantes e prestadores de serviço com foco em credibilidade e conversão.',
+      's2-title': 'LOJAS VIRTUAIS',
+      's2-desc': 'E-commerces com carrinho de compras, catálogo de produtos e integração com WhatsApp para vendas diretas e eficientes.',
+      's3-title': 'INTEGRAÇÃO COM IA',
+      's3-desc': 'Assistentes virtuais personalizados para atendimento ao cliente 24/7, integrando as mais avançadas APIs de Inteligência Artificial.',
+      's4-title': 'LANDING PAGES',
+      's4-desc': 'Páginas focadas em geração de leads e vendas, construídas com estrutura persuasiva e design otimizado para conversão.',
+      's5-title': 'OTIMIZAÇÃO DE SITES',
+      's5-desc': 'Melhorias de desempenho, velocidade e experiência do usuário para sites já existentes que precisam de uma revisão técnica e visual.',
+      'projects-label': 'Portfólio',
+      'projects-heading': 'PROJETOS',
+      'p1-type': '01 — E-COMMERCE',
+      'p1-desc': 'Loja virtual para venda de cafés com assistente de IA integrado.',
+      'p2-type': '02 — LOJA DIGITAL',
+      'p2-desc': 'Loja digital voltada para produtos e serviços gamers com painel admin.',
+      'p3-type': '03 — SITE INSTITUCIONAL',
+      'p3-desc': 'Site institucional para academia com apresentação de planos e contato direto.',
+      'p4-type': '04 — E-COMMERCE',
+      'p4-desc': 'Loja virtual completa com catálogo de produtos, carrinho e integração com WhatsApp.',
+      'tag-cart': 'Carrinho',
+      'tag-payment': 'Pagamento Online',
+      'tag-ai': 'Assistente IA',
+      'tag-products': 'Sistema de Produtos',
+      'tag-admin': 'Painel Admin',
+      'tag-design': 'Design Moderno',
+      'tag-plans': 'Planos',
+      'tag-gallery': 'Galeria',
+      'tag-form': 'Formulário',
+      'tag-catalog': 'Catálogo',
+      'diff-label': 'Por que me Escolher',
+      'diff-heading': 'DIFERENCIAIS',
+      'd1': 'Design moderno e profissional',
+      'd2': 'Sites responsivos para celular e computador',
+      'd3': 'Entrega rápida e pontual',
+      'd4': 'Suporte completo pós-entrega',
+      'd5': 'Integração com WhatsApp',
+      'd6': 'Integração com Inteligência Artificial',
+      'd7': 'Foco em experiência do usuário',
+      'd8': 'Soluções acessíveis e profissionais',
+      'contact-label': 'Vamos Conversar',
+      'contact-heading': 'INICIE SEU<br>PROJETO',
+      'contact-p': 'Pronto para levar seu negócio ao mais alto nível digital? Entre em contato e vamos criar juntos a presença online que o seu negócio merece.',
+      'contact-discord': 'Discord — mediante solicitação',
+      'form-name': 'Seu Nome',
+      'form-name-ph': 'Ex: João Silva',
+      'form-contact': 'E-mail ou WhatsApp',
+      'form-contact-ph': 'Ex: joao@email.com ou (31) 9xxxx-xxxx',
+      'form-project': 'Tipo de Projeto',
+      'form-select': 'Selecione um serviço...',
+      'form-message': 'Mensagem',
+      'form-msg-ph': 'Conte um pouco sobre seu negócio e o que precisa...',
+      'form-other': 'Outro',
+      'form-submit': 'Enviar Mensagem →',
+      'footer-copy': '© 2025 Zenith We — Sua presença digital no mais alto nível',
+    },
+    en: {
+      'nav-about': 'About',
+      'nav-services': 'Services',
+      'nav-projects': 'Projects',
+      'nav-contact': 'Contact',
+      'nav-cta': 'WhatsApp →',
+      'hero-tag': 'Web Development — Minas Gerais, BR',
+      'hero-h1-line1': 'TURNING',
+      'hero-h1-line2': 'IDEAS INTO',
+      'hero-h1-line3': 'PROFESSIONAL',
+      'hero-h1-line4': 'WEBSITES',
+      'hero-sub': "Hi, I'm Mateus — founder of Zenith We. We build modern, fast and responsive websites that generate credibility, attract clients and boost sales.",
+      'hero-btn1': 'See Projects',
+      'hero-btn2': 'Talk to Me',
+      'scroll': 'Scroll',
+      'about-label': 'About Me',
+      'about-p1': 'I am passionate about <strong>technology, programming and digital development</strong>. I study software development and web solutions, constantly evolving to deliver better and better projects.',
+      'about-p2': '<strong>Zenith We</strong> was born with the mission of offering affordable and professional digital solutions for small businesses and entrepreneurs who want to grow online.',
+      'stack-ai': 'AI APIs',
+      'num1': 'Projects Delivered',
+      'num2': 'Services Offered',
+      'num3': 'Smart Integration',
+      'num4': 'Post-delivery Support',
+      'services-label': 'What I Do',
+      'services-heading': 'SERVICES',
+      's1-title': 'INSTITUTIONAL WEBSITES',
+      's1-desc': 'Professional websites for companies, gyms, shops, restaurants and service providers focused on credibility and conversion.',
+      's2-title': 'ONLINE STORES',
+      's2-desc': 'E-commerce with shopping cart, product catalog and WhatsApp integration for direct and efficient sales.',
+      's3-title': 'AI INTEGRATION',
+      's3-desc': 'Custom virtual assistants for 24/7 customer support, integrating the most advanced Artificial Intelligence APIs.',
+      's4-title': 'LANDING PAGES',
+      's4-desc': 'Pages focused on lead generation and sales, built with a persuasive structure and design optimized for conversion.',
+      's5-title': 'WEBSITE OPTIMIZATION',
+      's5-desc': 'Performance, speed and user experience improvements for existing websites that need a technical and visual overhaul.',
+      'projects-label': 'Portfolio',
+      'projects-heading': 'PROJECTS',
+      'p1-type': '01 — E-COMMERCE',
+      'p1-desc': 'Online coffee shop with an integrated AI assistant.',
+      'p2-type': '02 — DIGITAL STORE',
+      'p2-desc': 'Digital store for gaming products and services with an admin panel.',
+      'p3-type': '03 — INSTITUTIONAL SITE',
+      'p3-desc': 'Institutional website for a gym showcasing plans and direct contact.',
+      'p4-type': '04 — E-COMMERCE',
+      'p4-desc': 'Full online store with product catalog, shopping cart and WhatsApp integration.',
+      'tag-cart': 'Cart',
+      'tag-payment': 'Online Payment',
+      'tag-ai': 'AI Assistant',
+      'tag-products': 'Product System',
+      'tag-admin': 'Admin Panel',
+      'tag-design': 'Modern Design',
+      'tag-plans': 'Plans',
+      'tag-gallery': 'Gallery',
+      'tag-form': 'Form',
+      'tag-catalog': 'Catalog',
+      'diff-label': 'Why Choose Me',
+      'diff-heading': 'HIGHLIGHTS',
+      'd1': 'Modern and professional design',
+      'd2': 'Responsive for mobile and desktop',
+      'd3': 'Fast and on-time delivery',
+      'd4': 'Full post-delivery support',
+      'd5': 'WhatsApp integration',
+      'd6': 'Artificial Intelligence integration',
+      'd7': 'Focus on user experience',
+      'd8': 'Affordable and professional solutions',
+      'contact-label': "Let's Talk",
+      'contact-heading': 'START YOUR<br>PROJECT',
+      'contact-p': "Ready to take your business to the highest digital level? Get in touch and let's build together the online presence your business deserves.",
+      'contact-discord': 'Discord — upon request',
+      'form-name': 'Your Name',
+      'form-name-ph': 'Ex: John Smith',
+      'form-contact': 'Email or WhatsApp',
+      'form-contact-ph': 'Ex: john@email.com or +1 (555) ...',
+      'form-project': 'Project Type',
+      'form-select': 'Select a service...',
+      'form-message': 'Message',
+      'form-msg-ph': 'Tell us a bit about your business and what you need...',
+      'form-other': 'Other',
+      'form-submit': 'Send Message →',
+      'footer-copy': '© 2025 Zenith We — Your digital presence at the highest level',
+    }
+  };
+
+  let currentLang = 'pt';
+
+  function toggleLang() {
+    currentLang = currentLang === 'pt' ? 'en' : 'pt';
+    applyTranslations();
+    document.getElementById('langFlag').textContent = currentLang === 'pt' ? 'US' : 'BR';
+    document.documentElement.lang = currentLang === 'pt' ? 'pt-BR' : 'en';
+
+    const contactSec = document.getElementById('contato');
+    contactSec.setAttribute('data-bg-text', currentLang === 'pt' ? 'CONTATO' : 'CONTACT');
+  }
+
+  function applyTranslations() {
+    const t = translations[currentLang];
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
+    });
+  }
+
+  // ── CURSOR ───────────────────────────────────
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 5 + 'px';
+    cursor.style.top = my - 5 + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx - 18 + 'px';
+    ring.style.top = ry - 18 + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  // ── FADE IN ON SCROLL ────────────────────────
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.services-grid .service-card, .diff-grid .diff-item').forEach((el, i) => {
+    el.style.transitionDelay = (i * 0.05) + 's';
+  });
+
+  // ── FORM SUBMIT (envia e-mail real via Formspree) ──
+  // 1. Crie uma conta gratuita em https://formspree.io
+  // 2. Crie um novo formulário e defina o e-mail de destino como 1zenithwe@gmail.com
+  // 3. Copie o ID do endpoint (ex: https://formspree.io/f/abcdwxyz -> ID = "abcdwxyz")
+  // 4. Substitua YOUR_FORM_ID abaixo por esse ID
+  const FORMSPREE_FORM_ID = 'xpqgadoe';
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = document.getElementById('form-submit-btn');
+    const status = document.getElementById('form-status');
+    const formData = new FormData(form);
+
+    const isPt = currentLang === 'pt';
+    const labels = {
+      sending: isPt ? 'Enviando...' : 'Sending...',
+      success: isPt ? 'Mensagem enviada! Vou responder em breve. ✓' : 'Message sent! I\'ll reply soon. ✓',
+      error: isPt
+        ? 'Não consegui enviar agora. Tente novamente ou chame no WhatsApp.'
+        : 'Couldn\'t send right now. Please try again or reach out on WhatsApp.',
+      notConfigured: isPt
+        ? 'Formulário ainda não configurado — chame direto no WhatsApp.'
+        : 'Form not configured yet — reach out directly on WhatsApp.',
+      originalLabel: btn.textContent
+    };
+
+    function showStatus(text, kind) {
+      status.textContent = text;
+      status.className = 'form-status is-visible' + (kind ? ' is-' + kind : '');
+    }
+
+    // Fallback amigável enquanto o endpoint do Formspree não foi configurado.
+    if (!FORMSPREE_FORM_ID || FORMSPREE_FORM_ID === 'YOUR_FORM_ID') {
+      showStatus(labels.notConfigured, 'error');
+      const name = formData.get('nome') || '';
+      const msg = isPt
+        ? `Olá Mateus! Sou ${name} e vim pelo seu portfólio. Gostaria de conversar sobre um projeto.`
+        : `Hi Mateus! I'm ${name} and I found you through your portfolio. I'd like to talk about a project.`;
+      window.open(`https://wa.me/5531986370212?text=${encodeURIComponent(msg)}`, '_blank');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = labels.sending;
+    showStatus(labels.sending, '');
+
+    fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    })
+      .then(response => {
+        if (response.ok) {
+          showStatus(labels.success, 'success');
+          form.reset();
+        } else {
+          return response.json().then(data => {
+            throw new Error((data && data.error) || 'Form submission failed');
+          });
+        }
+      })
+      .catch(() => {
+        showStatus(labels.error, 'error');
+      })
+      .finally(() => {
+        btn.disabled = false;
+        btn.textContent = labels.originalLabel;
+      });
+  }
+
+  // ── PROJECT PREVIEW ON HOVER ─────────────────
+  (function () {
+    const rows = document.querySelectorAll('.project-row[data-preview]');
+    if (!rows.length) return;
+
+    const preview = document.getElementById('project-preview');
+    const previewImg = document.getElementById('project-preview-img');
+    const previewTag = document.getElementById('project-preview-tag');
+
+    // Skip entirely on touch-only devices (no real cursor to follow).
+    const isCoarsePointer = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    if (isCoarsePointer) return;
+
+    const HALF_W = preview.offsetWidth / 2 || 180;
+    const HALF_H = preview.offsetHeight / 2 || 126;
+    const EASE = 0.16;          // lower = smoother/slower trailing
+    const SHOW_DELAY = 120;     // ms — elegant delay before it appears
+    const OFFSET_X = 28;        // gentle offset so the cursor stays free
+    const OFFSET_Y = -24;
+
+    let targetX = 0, targetY = 0;   // raw cursor position
+    let currentX = 0, currentY = 0; // eased/lerped position actually rendered
+    let activeRow = null;
+    let showTimer = null;
+    let rafId = null;
+    let isFollowing = false;
+    const loadedCache = new Set();  // avoid re-fading images already loaded once
+
+    function clampToViewport(x, y) {
+      const margin = 16;
+      const minX = HALF_W + margin;
+      const maxX = window.innerWidth - HALF_W - margin;
+      const minY = HALF_H + margin;
+      const maxY = window.innerHeight - HALF_H - margin;
+      return [
+        Math.min(Math.max(x, minX), Math.max(maxX, minX)),
+        Math.min(Math.max(y, minY), Math.max(maxY, minY))
+      ];
+    }
+
+    function tick() {
+      currentX += (targetX - currentX) * EASE;
+      currentY += (targetY - currentY) * EASE;
+      preview.style.transform = `translate3d(${currentX - HALF_W}px, ${currentY - HALF_H}px, 0)`;
+      if (isFollowing) {
+        rafId = requestAnimationFrame(tick);
+      }
+    }
+
+    function startFollowing() {
+      if (isFollowing) return;
+      isFollowing = true;
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function stopFollowing() {
+      isFollowing = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+
+    function setImage(url) {
+      if (!url) return;
+      if (loadedCache.has(url) && previewImg.src === url) {
+        previewImg.classList.add('is-loaded');
+        return;
+      }
+      previewImg.classList.remove('is-loaded');
+      const loader = new Image();
+      loader.onload = () => {
+        // Only commit if this is still the image we want (avoids race on fast hover-swap)
+        if (previewImg.dataset.pending === url) {
+          previewImg.src = url;
+          requestAnimationFrame(() => previewImg.classList.add('is-loaded'));
+          loadedCache.add(url);
+        }
+      };
+      loader.onerror = () => {
+        // Quietly keep the glass backdrop if the screenshot service fails.
+        previewImg.classList.remove('is-loaded');
+      };
+      previewImg.dataset.pending = url;
+      loader.src = url;
+    }
+
+    rows.forEach(row => {
+      row.addEventListener('mouseenter', (e) => {
+        const imageUrl = row.getAttribute('data-preview');
+        const accent = row.getAttribute('data-preview-color');
+
+        activeRow = row;
+        const [x, y] = clampToViewport(e.clientX + OFFSET_X, e.clientY + OFFSET_Y);
+        targetX = x; targetY = y;
+        currentX = x; currentY = y; // snap once so it doesn't fly in from origin
+        preview.style.transform = `translate3d(${currentX - HALF_W}px, ${currentY - HALF_H}px, 0)`;
+
+        if (accent) preview.style.setProperty('--accent', accent);
+        setImage(imageUrl);
+
+        clearTimeout(showTimer);
+        showTimer = setTimeout(() => {
+          if (activeRow === row) preview.classList.add('is-active');
+        }, SHOW_DELAY);
+
+        startFollowing();
+      });
+
+      row.addEventListener('mousemove', (e) => {
+        if (activeRow !== row) return;
+        const [x, y] = clampToViewport(e.clientX + OFFSET_X, e.clientY + OFFSET_Y);
+        targetX = x; targetY = y;
+      });
+
+      row.addEventListener('mouseleave', () => {
+        if (activeRow !== row) return;
+        activeRow = null;
+        clearTimeout(showTimer);
+        preview.classList.remove('is-active');
+        // Keep easing toward last position briefly, then fully stop once invisible.
+        setTimeout(() => { if (!activeRow) stopFollowing(); }, 500);
+      });
+    });
+
+    // Safety net: hide instantly if the mouse leaves the window entirely.
+    document.addEventListener('mouseleave', () => {
+      activeRow = null;
+      clearTimeout(showTimer);
+      preview.classList.remove('is-active');
+    });
+  })();
+</script>
+</body>
+</html>
