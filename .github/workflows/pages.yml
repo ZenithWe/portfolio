@@ -1,15 +1,15 @@
-name: Build and deploy portfolio
+name: Build and publish React portfolio
 on:
   push:
     branches: [main]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: portfolio-publish
+  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,17 +18,34 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install
-      - run: npm run build
+          cache: npm
+          cache-dependency-path: package.json
+      - name: Prepare Vite entry
+        run: cp app.html index.html
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build actual React effects
+        run: npm run build
+      - name: Keep GitHub Pages root in sync
+        run: |
+          cp dist/index.html index.html
+          mkdir -p assets
+          cp -R dist/assets/. assets/
+          touch .nojekyll
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets .nojekyll
+          git diff --cached --quiet || git commit -m "Publish compiled React portfolio with five effects"
+          git push
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
   deploy:
     needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
